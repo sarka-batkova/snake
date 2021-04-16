@@ -15,7 +15,7 @@ dis = pygame.display.set_mode((dis_width, dis_height))
 pygame.display.set_caption('Snake Game by Sarka')
 
 snake_block = 10
-snake_speed = 3
+snake_speed = 10
  
 clock = pygame.time.Clock()
 
@@ -71,6 +71,8 @@ def gameLoop():
                     y1_change = snake_block
                     x1_change = 0
 
+        # if x1 >= dis_width or x1 < 0 or y1 >= dis_height or y1 < 0:
+        #     game_close = True
     
         x1 += x1_change
         y1 += y1_change
@@ -89,7 +91,7 @@ def gameLoop():
 
         if x1 == foodx and y1 == foody:
             score += 1
-            message("score", red)
+            print(score)
     
         clock.tick(snake_speed)
 
