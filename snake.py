@@ -9,10 +9,10 @@ black = (0, 0, 0)
 red = (213, 50, 80)
 blue = (50, 153, 213)
  
-dis_width = 600
-dis_height = 400
+display_width = 600
+display_height = 400
  
-dis = pygame.display.set_mode((dis_width, dis_height))
+display = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption('Snake Game by Sarka')
  
 clock = pygame.time.Clock()
@@ -25,20 +25,18 @@ font_style = pygame.font.SysFont("bahnschrift", 20)
 
 def message(msg, color, x, y):
     mesg = font_style.render(msg, True, color)
-    dis.blit(mesg, [x, y]) 
-
- 
+    display.blit(mesg, [x, y]) 
  
 def draw_snake(snake_block, snake_list):
     for x in snake_list:
-        pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
+        pygame.draw.rect(display, black, [x[0], x[1], snake_block, snake_block])
  
 def gameLoop():
     game_over = False
     game_close = False
  
-    x1 = dis_width / 2
-    y1 = dis_height / 2
+    x1 = display_width / 2
+    y1 = display_height / 2
  
     x1_change = 0
     y1_change = 0
@@ -46,8 +44,8 @@ def gameLoop():
     snake_list = []
     length_of_snake = 1
 
-    draw_foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
-    draw_foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
+    draw_foodx = round(random.randrange(0, display_width - snake_block) / 10.0) * 10.0
+    draw_foody = round(random.randrange(0, display_height - snake_block) / 10.0) * 10.0
  
     foodx = draw_foodx
     foody = draw_foody
@@ -55,8 +53,8 @@ def gameLoop():
     while not game_over:
  
         while game_close == True:
-            dis.fill(white)
-            message("You Lost! Press P to Play Again or Q to Quit", red, dis_width/4, dis_height/4)
+            display.fill(white)
+            message("You Lost! Press P to Play Again or Q to Quit", red, display_width/4, display_height/4)
             message("Your score: " + str(length_of_snake-1), red, 20, 0)
             pygame.display.update()
  
@@ -90,23 +88,23 @@ def gameLoop():
 
         x1 += x1_change
         y1 += y1_change
-        dis.fill(white)
+        display.fill(white)
 
-        if x1 >= dis_width: x1 = 0
-        if x1 < 0: x1 = dis_width 
-        if y1 >= dis_height: y1 = 0
-        if y1 < 0: y1 = dis_height 
+        if x1 >= display_width: x1 = 0
+        if x1 < 0: x1 = display_width 
+        if y1 >= display_height: y1 = 0
+        if y1 < 0: y1 = display_height 
 
-        pygame.draw.rect(dis, blue, [foodx, foody, snake_block, snake_block])
-        snake_Head = []
-        snake_Head.append(x1)
-        snake_Head.append(y1)
-        snake_list.append(snake_Head)
+        pygame.draw.rect(display, blue, [foodx, foody, snake_block, snake_block])
+        snake_head = []
+        snake_head.append(x1)
+        snake_head.append(y1)
+        snake_list.append(snake_head)
         if len(snake_list) > length_of_snake:
             del snake_list[0]
  
         for x in snake_list[:-1]:
-            if x == snake_Head:
+            if x == snake_head:
                game_close = True
  
         draw_snake(snake_block, snake_list)
