@@ -30,6 +30,10 @@ def message(msg, color, x, y):
 def draw_snake(snake_block, snake_list):
     for x in snake_list:
         pygame.draw.rect(display, black, [x[0], x[1], snake_block, snake_block])
+
+def draw_food(dimension):
+    return round(random.randrange(0, dimension - snake_block) / 10.0) * 10.0
+
  
 def gameLoop():
     game_over = False
@@ -43,12 +47,9 @@ def gameLoop():
  
     snake_list = []
     length_of_snake = 1
-
-    draw_foodx = round(random.randrange(0, display_width - snake_block) / 10.0) * 10.0
-    draw_foody = round(random.randrange(0, display_height - snake_block) / 10.0) * 10.0
  
-    foodx = draw_foodx
-    foody = draw_foody
+    foodx = draw_food(display_width)
+    foody = draw_food(display_height)
  
     while not game_over:
  
@@ -113,8 +114,8 @@ def gameLoop():
         pygame.display.update()
  
         if x1 == foodx and y1 == foody:
-            foodx = draw_foodx
-            foody = draw_foody
+            foodx = draw_food(display_width)
+            foody = draw_food(display_height)
             length_of_snake += 1
  
         clock.tick(snake_speed)
